@@ -169,5 +169,6 @@ class ImageProcessingBot(Bot):
         try:
             self.send_photo(chat_id, photo_path)
         except Exception as e:
+
             logger.info(f"Error sending photo to chat {chat_id}: {e}")
             self.send_text(chat_id, "Error sending photo... Please try again later.")

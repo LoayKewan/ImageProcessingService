@@ -1,6 +1,7 @@
 import flask
 from flask import request
 import os
+import time
 from bot import Bot, QuoteBot, ImageProcessingBot
 
 app = flask.Flask(__name__)
@@ -17,11 +18,11 @@ def index():
 @app.route(f'/{TELEGRAM_TOKEN}/', methods=['POST'])
 def webhook():
     req = request.get_json()
+    print(req)
     bot.handle_message(req['message'])
     return 'Ok'
 
-
 if __name__ == "__main__":
-    bot = Bot(TELEGRAM_TOKEN, TELEGRAM_APP_URL)
+    bot = ImageProcessingBot(TELEGRAM_TOKEN, TELEGRAM_APP_URL)
 
     app.run(host='0.0.0.0', port=8443)

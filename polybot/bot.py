@@ -120,7 +120,7 @@ class ImageProcessingBot(Bot):
                     if caption == 'blur':
                         self.blur(msg)
                     elif caption == 'contour':
-                        pass
+                        self.contour(msg)
                     elif caption == 'rotate':
                         self.rotate(msg)
                     elif caption == 'segment':
@@ -134,7 +134,7 @@ class ImageProcessingBot(Bot):
                 else:
                     self.send_text(msg['chat']['id'], "No caption found. Please include a caption.")
             except Exception as e:
-                print(caption + "hiiiiiiiiiiiiiiiiiiiii")
+
                 logger.info(f"Error occurred: {e}")
                 self.send_text(msg['chat']['id'], "Something went wrong... Please try again later.")
 
@@ -162,6 +162,21 @@ class ImageProcessingBot(Bot):
         except Exception as e:
             logger.info(f"Error occurred during blur processing: {e}")
             self.send_text(msg['chat']['id'], "Error processing image... Please try again later.")
+
+
+    def contour(self, msg):
+        try:
+            img_path = self.download_user_photo(msg)
+            new_image = Img(img_path)
+            new_image.contour()
+            new_path = new_image.save_img()
+            self.send_photo_with_timeout(msg['chat']['id'], new_path)
+        except Exception as e:
+            logger.info(f"Error occurred during blur processing: {e}")
+            self.send_text(msg['chat']['id'], "Error processing image... Please try again later.")
+
+
+
 
     # Implement other image processing methods (contour, rotate, segment, salt_and_pepper, concat) similarly
 

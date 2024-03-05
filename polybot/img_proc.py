@@ -1,6 +1,6 @@
 from pathlib import Path
 from matplotlib.image import imread, imsave
-
+import random
 
 def rgb2gray(rgb):
     r, g, b = rgb[:, :, 0], rgb[:, :, 1], rgb[:, :, 2]
@@ -55,16 +55,7 @@ class Img:
         # TODO remove the `raise` below, and write your implementation
         from PIL import Image
 
-        # # Create a new grayscale image
-        # data = [
-        #     [124.3859, 114.8707, 104.5836, 94.1502, 78.0764, 58.8288, 48.9932, 48.0319, 66.0795, 71.1499, 82.0779,
-        #      95.9948, 107.6669, 116.2746, 122.0613, 127.0222, 126.9235, 130.1404, 135.8625, 126.0053, 104.0183, 98.9865,
-        #      103.3559, 98.8402, 102.8398, 106.1276, 103.3559, 98.0467, 94.9653, 91.243, 91.9979, 100.2852, 104.8826,
-        #      109.8929, 112.9635, 114.6752, 121.0274, 130.6566, 141.8557, 147.9906, 132.1924, 134.0997, 139.6261,
-        #      148.0983, 159.011, 169.3367, 176.0156, 179]
-        # ]
 
-        # Assuming each sublist represents a row in the image
         image_width = len(self.data[0])
         image_height = len(self.data)
 
@@ -80,7 +71,15 @@ class Img:
 
     def salt_n_pepper(self):
         # TODO remove the `raise` below, and write your implementation
-        raise NotImplementedError()
+        rows = len(self.data)
+        columns = len(self.data[0])
+        for i in range(rows):
+            for j in range(columns):
+                ran_num = random.random()
+                if ran_num < 0.2:
+                    self.data[i][j] = 255
+                elif ran_num > 0.8:
+                    self.data[i][j] = 0
 
     def concat(self, other_img, direction='horizontal'):
         # TODO remove the `raise` below, and write your implementation

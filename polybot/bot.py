@@ -157,7 +157,7 @@ class ImageProcessingBot(Bot):
                 new_image = Img(img_path)
                 new_image.rotate()
                 new_path = new_image.save_img()
-                self.send_photo(msg['chat']['id'], new_path)
+                # self.send_photo(msg['chat']['id'], new_path)
                 self.send_photo_with_timeout(msg['chat']['id'], new_path)
         except Exception as e:
             logger.info(f"Error occurred during blur processing: {e}")

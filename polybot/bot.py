@@ -84,7 +84,6 @@ class ImageProcessingBot(Bot):
         """Bot Main message handler"""
         # logger.info(f'Incoming message: {msg}')
 
-
         if "text" in msg and msg["text"] == "hi":
             self.send_text(msg['chat']['id'], f'Hi : {msg["first_name"]} {msg["last_name"]} , how i can help you ?  \n ')
 

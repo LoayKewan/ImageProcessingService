@@ -80,9 +80,15 @@ class ImageProcessingBot(Bot):
     #     super().__init__(token, telegram_chat_url)
 
     def handle_message(self, msg):
+
         """Bot Main message handler"""
         # logger.info(f'Incoming message: {msg}')
-        if "text" in msg:
+
+
+        if "text" in msg and msg["text"] == "hi":
+            self.send_text(msg['chat']['id'], f'Hi : {msg["first_name"]} {msg["last_name"]} , how i can help you ?  \n ')
+
+        elif msg["text"] != "hi":
             self.send_text(msg['chat']['id'], f'Your original message: {msg["text"]}')
         else:
             if "caption" in msg:
